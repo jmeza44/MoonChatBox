@@ -1,0 +1,10 @@
+<header class="px-5 py-4 bg-purple-800 border-b border-purple-500">
+  <h1 class="inline-block text-3xl font-bold">{{title}}</h1>
+  @if (title !== '' && joined) {
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+    class="inline-block size-8 float-end cursor-pointer" (click)="onLeave()">
+    <path stroke-linecap="round" stroke-linejoin="round"
+      d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
+  </svg>
+  }
+</header>

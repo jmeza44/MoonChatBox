@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonChatBox.Domain", "MoonChatBox.Domain\MoonChatBox.Domain.csproj", "{421DA1BC-5E6E-4660-9A56-3A4FF6B70984}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonChatBox.Application", "MoonChatBox.Application\MoonChatBox.Application.csproj", "{92152199-A4F2-4C95-8AC4-7F5F42ECD0AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonChatBox.Infrastructure", "MoonChatBox.Infrastructure\MoonChatBox.Infrastructure.csproj", "{9271423C-B1A9-48AC-87C5-F4321B0F6475}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoonChatBox.WebApi", "MoonChatBox.WebApi\MoonChatBox.WebApi.csproj", "{3A229450-FE8A-4FBC-AEC4-A1E1D0DF12EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{421DA1BC-5E6E-4660-9A56-3A4FF6B70984}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421DA1BC-5E6E-4660-9A56-3A4FF6B70984}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421DA1BC-5E6E-4660-9A56-3A4FF6B70984}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421DA1BC-5E6E-4660-9A56-3A4FF6B70984}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92152199-A4F2-4C95-8AC4-7F5F42ECD0AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92152199-A4F2-4C95-8AC4-7F5F42ECD0AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92152199-A4F2-4C95-8AC4-7F5F42ECD0AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92152199-A4F2-4C95-8AC4-7F5F42ECD0AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9271423C-B1A9-48AC-87C5-F4321B0F6475}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9271423C-B1A9-48AC-87C5-F4321B0F6475}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9271423C-B1A9-48AC-87C5-F4321B0F6475}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9271423C-B1A9-48AC-87C5-F4321B0F6475}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A229450-FE8A-4FBC-AEC4-A1E1D0DF12EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A229450-FE8A-4FBC-AEC4-A1E1D0DF12EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A229450-FE8A-4FBC-AEC4-A1E1D0DF12EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A229450-FE8A-4FBC-AEC4-A1E1D0DF12EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1E971E4C-361A-4AB1-83D1-63811C6DA678}
+	EndGlobalSection
+EndGlobal

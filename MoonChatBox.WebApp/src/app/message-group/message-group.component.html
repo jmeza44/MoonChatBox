@@ -1,0 +1,13 @@
+<div [class]="{'flex-row-reverse': isMirrored, 'flex-row': !isMirrored}" class="flex w-full gap-x-5">
+  <div
+    class="flex-initial relative block size-8 rounded-full bg-purple-800 outline outline-2 outline-purple-500 overflow-hidden">
+    <img class="object-cover size-8" [ngSrc]="'../../../avatars/' + chatMessageGroup.pictureUrl + '.jpg'" width="32"
+      height="32" alt="avatar">
+  </div>
+  <div [class]="{'items-end': isMirrored, 'items-start': !isMirrored}"
+    class="flex-1 flex flex-col gap-y-2 overflow-hidden">
+    @for (message of chatMessageGroup.messages; track $index) {
+    <moon-message [message]="message"></moon-message>
+    }
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<main
+  class="h-[750px] w-[1240px] grid grid-cols-4 overflow-hidden bg-purple-900 outline outline-4 outline-purple-500 rounded-2xl">
+  <div class="col-span-1 border-r border-r-purple-500 overflow-hidden">
+    <moon-current-user-information></moon-current-user-information>
+    <moon-chat-list [chats]="chats" (clickOnItem)="onChatListItemClicked($event)"></moon-chat-list>
+  </div>
+  <div class="col-span-3 pattern flex flex-col w-full h-full overflow-hidden">
+    <div class="flex-initial">
+      <moon-chat-view-header [chatId]="selectedChatId" [title]="getChatName(selectedChatId)"
+        [joined]="joinedInSelectedChat" (leaveChat)="onLeave()"></moon-chat-view-header>
+    </div>
+    <moon-chat-messages-container [chatMessagesGroups]="chatMessagesGroups"
+      [joinedInChat]="joinedInSelectedChat || selectedChatId === 0"
+      (joinChat)="joinChat()"></moon-chat-messages-container>
+    <div class="flex-initial">
+      <moon-chat-view-message-input [disabled]="selectedChatId === 0"
+        (messageSend)="addNewMessage($event)"></moon-chat-view-message-input>
+    </div>
+  </div>
+</main>

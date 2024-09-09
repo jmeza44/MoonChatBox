@@ -1,0 +1,5 @@
+<ul>
+  @for (chat of chats; track chat.name) {
+  <moon-chat-list-item [chat]="chat" (itemClicked)="onItemClicked($event)"></moon-chat-list-item>
+  } @empty {}
+</ul>

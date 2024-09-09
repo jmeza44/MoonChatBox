@@ -1,0 +1,48 @@
+<div class="absolute top-8 right-8 flex flex-col gap-y-4">
+  @for (toast of toasts; track toast.id)
+  {
+  <div class="w-96 px-8 py-6 bg-lime-600 rounded-lg shadow-md flex flex-row items-center z-50 overflow-hidden"
+    [class]="{'bg-sky-600': isInformation(toast), 'bg-lime-600': isSuccess(toast), 'bg-amber-600': isWarning(toast), 'bg-red-600': isError(toast)}">
+    <!-- Type Icon -->
+    <div class="flex-initial inline-block mr-4 p-2 cursor-pointer rounded-lg bg-white bg-opacity-15">
+      @if (isInformation(toast)) {
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+      </svg>
+      } @else if (isSuccess(toast)) {
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+      } @else if (isWarning(toast)) {
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+      </svg>
+      } @else if (isError(toast)) {
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5" />
+      </svg>
+      }
+    </div>
+
+    <!-- Message -->
+    <span class="flex-auto inline-block text-xl text-white font-medium break-all">{{toast.message}}</span>
+
+    <!-- Close Icon -->
+    <div class="flex-initial inline-block ml-4 p-2 cursor-pointer rounded-lg hover:bg-white hover:bg-opacity-15"
+      (click)="onClose(toast.id)">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    </div>
+  </div>
+  }
+</div>

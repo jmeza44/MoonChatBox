@@ -1,0 +1,40 @@
+<div
+  class="h-auto w-[520px] px-8 py-10 overflow-hidden bg-purple-900 outline outline-4 outline-purple-500 rounded-2xl shadow">
+  <h1 class="text-2xl font-bold leading-tight tracking-tight mb-6">Sign In</h1>
+
+  <form class="flex flex-col gap-y-8" [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+    <div class="relative" *ngIf="nicknameFormControl">
+      <label for="nickname" class="block text-sm font-semibold mb-2"
+        [ngClass]="{'text-red-600': nicknameIsTouchedOrDirty && nicknameFormControl.errors?.['required']}">Nickname</label>
+      <input id="nickname"
+        class="w-full appearance-none text-sm caret-purple-500 text-gray-100 px-5 py-4 rounded-2xl bg-transparent border border-purple-500 outline-none focus:ring-2 focus:ring-purple-500 placeholder:text-gray-300 transition-all duration-150"
+        type="text" placeholder="Nickname" [formControl]="nicknameFormControl"
+        [ngClass]="{'border-red-600 caret-red-600 text-red-600 focus:ring-2 focus:ring-red-600 placeholder:text-red-600': nicknameIsTouchedOrDirty && nicknameFormControl.errors?.['required']}">
+      @if (nicknameIsTouchedOrDirty && nicknameFormControl.errors?.['required']) {
+      <span class="absolute -bottom-6 left-0 block text-red-600 text-sm font-normal">The nickname field it's
+        required.</span>
+      }
+    </div>
+
+    <div class="relative" *ngIf="avatarFormControl">
+      <label for="avatar" class="block text-sm font-semibold mb-2"
+        [ngClass]="{'text-red-600': avatarIsTouchedOrDirty && avatarFormControl.errors?.['required']}">Avatar</label>
+      <div class="flex flex-row flex-wrap gap-3 justify-between">
+        @for (avatar of avatars; track $index) {
+        <input type="radio"
+          class="appearance-none size-24 rounded-full bg-purple-800 bg-center bg-cover border border-purple-500 overflow-hidden cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus:checked:ring-offset-2 focus:checked:ring-offset-purple-400 checked:ring-2 checked:ring-purple-400 checked:ring-offset-0 transition-all duration-150"
+          [formControl]="avatarFormControl" [value]="avatar.value" [style.background-image]="'url(' + avatar.url + ')'"
+          [ngClass]="{'border-red-600 focus:ring-2 focus:ring-red-600': avatarIsTouchedOrDirty && avatarFormControl.errors?.['required']}">
+        }
+      </div>
+      @if (avatarIsTouchedOrDirty && avatarFormControl.errors?.['required']) {
+      <span class="absolute -bottom-6 left-0 block text-red-600 text-sm font-normal">Please, select an Avatar.</span>
+      }
+    </div>
+
+    <button type="submit"
+      class="px-2 py-3 bg-purple-600 font-semibold text-lg rounded-xl hover:bg-purple-500 outline-none focus:ring-2 focus:ring-purple-500 transition-all duration-150"
+      [ngClass]="{'bg-gray-500 hover:bg-gray-400 focus:ring-2 focus:ring-gray-500': !signInForm.valid && signInForm.touched}">Init
+      Session</button>
+  </form>
+</div>
