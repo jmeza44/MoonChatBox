@@ -1,0 +1,159 @@
+# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
+[Bb]in/
+[Oo]bj/
+
+# Logs
+Logs/
+*.log
+npm-debug.log
+yarn-error.log
+
+# Generated files
+project.lock.json
+.vs/
+csx
+*.build.csdef
+*.suo
+*.user
+*.sln.docstates
+*.swp
+*.swo
+.DS_STORE
+month.txt
+
+# MSTest test results
+TestResults
+
+# Visual Studio specific
+*.vspscc
+*.vssscc
+*.suo
+*.user
+*.sln.docstates
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.psess
+*.vsp
+*.vspx
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.log
+.builds
+
+# Visual C++ cache files
+ipch/
+*.ncb
+*.sdf
+
+# ReSharper
+_ReSharper*
+
+# NCrunch
+*.ncrunch*
+.*crunch*.local.xml
+
+# InstallShield
+[Ee]xpress
+
+# DocProject
+DocProject/buildhelp/
+DocProject/Help/*.HxT
+DocProject/Help/*.HxC
+DocProject/Help/*.hhc
+DocProject/Help/*.hhk
+DocProject/Help/*.hhp
+DocProject/Help/Html2
+DocProject/Help/html
+
+# Click-Once directory
+publish
+
+# Publish Web Output
+*.Publish.xml
+
+# NuGet Packages Directory
+packages
+
+# Windows Store app package directory
+AppPackages/
+
+# Others
+sql
+[Tt]est[Rr]esult*
+*.Cache
+ClientBin
+[Ss]tyle[Cc]op.*
+~$*
+*.dbmdl
+Generated_Code
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+src/.vs/config/applicationhost.config
+
+# JetBrains Rider
+.idea/
+
+# CircleCI
+.circleci/
+month.txt
+
+# Bazel
+/dist/
+/bazel-out
+/integration/bazel/bazel-*
+.bazelrc.user
+
+# npm & yarn
+node_modules/
+*.log
+
+# Angular
+.angular/
+aio/node_modules
+aio/out-tsc
+
+# VSCode
+.vscode/launch.json
+.vscode/settings.json
+.vscode/tasks.json
+.settings/
+.modules/.vscode
+.history
+
+# Dev Container
+.devcontainer/*
+!.devcontainer/README.md
+!.devcontainer/recommended-devcontainer.json
+!.devcontainer/recommended-Dockerfile
+
+# Husky
+.husky/_
+
+# Rollup
+/modules/rollup-test/dist/
+
+# Misc
+*secret.js
+.notes.md
+baseline.json
