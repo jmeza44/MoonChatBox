@@ -25,13 +25,13 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish .\MoonChatBox.WebApi\ --configuration Release --output ${{env.DOTNET_ROOT}}\Release
+        run: dotnet publish .\MoonChatBox.WebApi\ -c Release --output .\MoonChatBox.WebApi\bin\MyRelease
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: MoonChatBox
-          path: ${{env.DOTNET_ROOT}}\Release
+          path: .\MoonChatBox.WebApi\bin\MyRelease
 
   deploy:
     runs-on: windows-latest
