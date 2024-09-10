@@ -25,7 +25,7 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish .\MoonChatBox.WebApi\ --no-restore --no-build --configuration Release --output ${{env.DOTNET_ROOT}}\Release
+        run: dotnet publish .\MoonChatBox.WebApi\ --configuration Release --output ${{env.DOTNET_ROOT}}\Release
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
