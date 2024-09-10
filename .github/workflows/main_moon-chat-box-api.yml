@@ -25,13 +25,13 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release
+        run: dotnet publish .\MoonChatBox.WebApi\ --no-restore --no-build --configuration Release --output ${{env.DOTNET_ROOT}}\Release
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: .net-app
-          path: ${{env.DOTNET_ROOT}}
+          name: MoonChatBox
+          path: ${{env.DOTNET_ROOT}}\Release
 
   deploy:
     runs-on: windows-latest
@@ -46,7 +46,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: .net-app
+          name: MoonChatBox
       
       - name: Login to Azure
         uses: azure/login@v2
