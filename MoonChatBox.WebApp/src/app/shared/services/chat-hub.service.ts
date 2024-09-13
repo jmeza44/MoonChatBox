@@ -10,12 +10,12 @@ import { UserSession } from '../models/user-session.model';
 export class ChatHubService {
   private readonly chatHubUrl = `${environment.apiBaseUrl}/ChatHub`;
   private messageSubject = new Subject<{ chatId: number, message: string, receivedAt: Date, userSession: UserSession; }>();
-  private userJoinedSubject = new Subject<{ userNickname: string, chatId: number; }>();
-  private userLeftSubject = new Subject<{ userNickname: string, chatId: number; }>();
+  private userConnectionSubject = new Subject<boolean>();
+  private userChatStatusSubject = new Subject<{ userNickname: string, chatId: number, isJoined: boolean; }>();
 
   message$ = this.messageSubject.asObservable();
-  userJoined$ = this.userJoinedSubject.asObservable();
-  userLeft$ = this.userLeftSubject.asObservable();
+  userConnection$ = this.userConnectionSubject.asObservable();
+  userChatStatus$ = this.userChatStatusSubject.asObservable();
 
   private hubConnection: signalR.HubConnection;
 
@@ -24,22 +24,30 @@ export class ChatHubService {
       .withUrl(this.chatHubUrl, {
         withCredentials: false,
         headers: {
-          'Access-Control-Allow-Credentials': 'true'
+          'Access-Control-Allow-Credentials': 'true',
         } as signalR.MessageHeaders
       } as signalR.IHttpConnectionOptions)
       .withAutomaticReconnect()
       .build();
+
+    this.hubConnection.on('UserJoined', () => {
+      this.userConnectionSubject.next(true);
+    });
+
+    this.hubConnection.on('UserLeft', () => {
+      this.userConnectionSubject.next(false);
+    });
 
     this.hubConnection.on('ReceiveMessage', (chatId: number, message: string, receivedAt: Date, userSession: UserSession) => {
       this.messageSubject.next({ chatId, message, receivedAt, userSession });
     });
 
     this.hubConnection.on('UserJoined', (userNickname: string, chatId: number) => {
-      this.userJoinedSubject.next({ userNickname, chatId });
+      this.userChatStatusSubject.next({ userNickname, chatId, isJoined: true });
     });
 
     this.hubConnection.on('UserLeft', (userNickname: string, chatId: number) => {
-      this.userLeftSubject.next({ userNickname, chatId });
+      this.userChatStatusSubject.next({ userNickname, chatId, isJoined: false });
     });
   }
 

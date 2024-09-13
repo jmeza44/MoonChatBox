@@ -57,10 +57,7 @@ export class ChatMessagesContainerComponent implements OnInit, AfterViewChecked,
 
   scrollToBottom(): void {
     const container = this.chatContainerRef?.nativeElement;
-    console.log(container);
     if (container !== undefined && container !== null) {
-      console.log(container.scrollTop);
-      console.log(container.scrollHeight);
       container.scrollTop = container.scrollHeight;
     }
   }

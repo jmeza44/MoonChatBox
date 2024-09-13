@@ -7,11 +7,12 @@ import { ScrollBottomService } from '../chat-messages-container/scroll-bottom.se
   selector: 'moon-message',
   standalone: true,
   imports: [DatePipe],
-  templateUrl: './message.component.html',
-  styleUrl: './message.component.scss'
+  templateUrl: './message.component.html'
 })
 export class MessageComponent implements OnInit {
   @Input() message!: ChatMessage;
+
+  get isFromSystem(): boolean { return this.message.sender.nickname === ''; }
 
   constructor(private scrollBottomService: ScrollBottomService) {}
 

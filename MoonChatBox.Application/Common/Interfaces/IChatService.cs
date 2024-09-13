@@ -1,5 +1,4 @@
 using MoonChatBox.Application.Common.Models;
-using MoonChatBox.Domain.Entities;
 
 namespace MoonChatBox.Application.Common.Interfaces;
 

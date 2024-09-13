@@ -1,4 +1,4 @@
 <div class="relative w-fit max-w-lg py-2 pl-3 pr-11 bg-purple-800 border border-purple-500 rounded-md overflow-hidden">
-  <p class="text-sm">{{ message.content }}</p>
+  <p class="text-sm" [class]="{'italic': isFromSystem}">{{ message.content }}</p>
   <span class="absolute inline text-xs font-light bottom-1 right-0 px-2">{{message.sentAt | date: 'HH:mm'}}</span>
 </div>

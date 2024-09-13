@@ -11,6 +11,7 @@ import { MessageService } from '../shared/services/message.service';
 import { ChatHubService } from '../shared/services/chat-hub.service';
 import { UserSessionService } from '../shared/services/user-session.service';
 import { UserSession } from '../shared/models/user-session.model';
+import { ToastAlertsService } from '../shared/services/toast-alerts.service';
 
 @Component({
   selector: 'moon-chat-box-dashboard',
@@ -36,25 +37,22 @@ export class ChatBoxDashboardComponent implements OnInit {
     private chatHubService: ChatHubService,
     private messageService: MessageService,
     private userSessionService: UserSessionService,
+    private toastAlertsService: ToastAlertsService,
   ) {}
 
   ngOnInit(): void {
     this.fetchChats();
 
-    this.chatHubService.message$.subscribe({
-      next: (messageReceived) => {
-        if (messageReceived.chatId !== this.selectedChatId) return;
+    this.chatHubService.message$.subscribe(messageReceived => {
+      if (messageReceived.chatId !== this.selectedChatId) return;
 
-        const noMessagesInTheChat: boolean = this.chatMessagesGroups.length === 0;
-        const lastGroupOfMessages = this.chatMessagesGroups[this.chatMessagesGroups.length - 1];
-        const senderIsSameAsLast: boolean = lastGroupOfMessages.sender.nickname === messageReceived.userSession.nickname;
+      const lastGroupOfMessages = this.chatMessagesGroups[this.chatMessagesGroups.length - 1];
+      const senderIsSameAsLast = lastGroupOfMessages?.sender.nickname === messageReceived.userSession.nickname;
 
-        if (noMessagesInTheChat)
-          this.pushANewGroupOfMessages(messageReceived);
-        else if (lastGroupOfMessages !== undefined && senderIsSameAsLast)
-          this.pushANewMessage(lastGroupOfMessages, messageReceived);
-        else
-          this.pushANewGroupOfMessages(messageReceived);
+      if (this.chatMessagesGroups.length === 0 || !senderIsSameAsLast) {
+        this.pushANewGroupOfMessages(messageReceived);
+      } else {
+        this.pushANewMessage(lastGroupOfMessages, messageReceived);
       }
     });
   }
@@ -73,32 +71,45 @@ export class ChatBoxDashboardComponent implements OnInit {
   }
 
   joinChat() {
-    this.chats.forEach((chat: Chat) => {
-      if (chat.id === this.selectedChatId) {
-        chat.joined = true;
-      }
-    });
     this.userSessionService.getUserSession()
       .subscribe({
         next: (userSession: UserSession | null) => {
-          if (userSession !== null) this.chatHubService.joinChat(this.selectedChatId, userSession.nickname);
-          else console.error("Cannot connect if the user has not session.");
+          if (userSession !== null) {
+            this.chatService.joinChat(this.selectedChatId, userSession.nickname).subscribe({
+              next: () => {
+                this.chats.forEach((chat: Chat) => {
+                  if (chat.id === this.selectedChatId) {
+                    chat.joined = true;
+                  }
+                });
+                this.fetchMessagesGrouped(this.selectedChatId);
+              }
+            });
+            this.chatHubService.joinChat(this.selectedChatId, userSession.nickname);
+          }
+          else this.toastAlertsService.error("Cannot join the chat if you has not session. Try refreshing the page.");
         }
       });
-    this.fetchMessagesGrouped(this.selectedChatId);
   }
 
   onLeave() {
-    this.chats.forEach((chat: Chat) => {
-      if (chat.id === this.selectedChatId) {
-        chat.joined = false;
-        this.chatMessagesGroups = [];
-      }
-    });
     this.userSessionService.getUserSession()
       .subscribe({
         next: (userSession: UserSession | null) => {
-          if (userSession !== null) this.chatHubService.leaveChat(this.selectedChatId, userSession.nickname);
+          if (userSession !== null) {
+            this.chatService.leaveChat(this.selectedChatId, userSession.nickname).subscribe({
+              next: () => {
+                this.chats.forEach((chat: Chat) => {
+                  if (chat.id === this.selectedChatId) {
+                    chat.joined = false;
+                    this.chatMessagesGroups = [];
+                  }
+                });
+              }
+            });
+            this.chatHubService.leaveChat(this.selectedChatId, userSession.nickname);
+          }
+          else this.toastAlertsService.error("Cannot join the chat if you has not session. Try refreshing the page.");
         }
       });
   }

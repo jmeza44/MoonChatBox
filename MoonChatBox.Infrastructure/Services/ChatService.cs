@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.SignalR;
 using MoonChatBox.Application.Common.Interfaces;
 using MoonChatBox.Application.Common.Models;
-using MoonChatBox.Domain.Entities;
 using MoonChatBox.Infrastructure.RealTime;
 
 namespace MoonChatBox.Infrastructure.Services;

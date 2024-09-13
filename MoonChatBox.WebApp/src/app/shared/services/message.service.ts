@@ -5,6 +5,7 @@ import { ChatMessage } from '../models/chat-message.model';
 import { map, Observable, switchMap } from 'rxjs';
 import { ChatMessageGroup } from '../models/chat-message-group.model';
 import { UserSessionService } from './user-session.service';
+import { utcDateToLocalDate } from '../utilities/utc-date-to-local-date';
 
 @Injectable({ providedIn: 'root' })
 export class MessageService {
@@ -15,7 +16,12 @@ export class MessageService {
   getMessagesFromChat(chatId: number): Observable<ChatMessageGroup[]> {
     return this.http.get<ChatMessage[]>(`${this.controllerUrl}/GetMessagesFromChat`, {
       params: { chatId }
-    }).pipe(map((messages) => this.groupMessagesBySender(messages)));
+    })
+      .pipe(map((messages) => messages.map((message) => ({
+        ...message,
+        sentAt: utcDateToLocalDate(message.sentAt)
+      }))))
+      .pipe(map((messages) => this.groupMessagesBySender(messages)));
   }
 
   send(chatId: number, message: string): Observable<number> {

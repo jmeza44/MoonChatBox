@@ -1,12 +1,11 @@
 <header class="flex items-center w-full py-4 px-3 overflow-hidden border-b border-purple-500 bg-purple-800">
   <div
     class="flex-initial relative block size-16 mr-5 rounded-full outline outline-2 outline-purple-500 overflow-hidden">
-    <img class="object-cover size-16"
-      ngSrc="https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1723161600&semt=ais_hybrid"
-      width="64" height="64" alt="avatar">
+    <img class="object-cover size-16" [ngSrc]="'../../../avatars/' + userSession?.avatar + '.jpg'" width="64"
+      height="64" alt="avatar">
   </div>
   <div class="flex-auto block overflow-hidden">
-    <h2 class="text-base font-bold">Nickname</h2>
+    <h2 class="text-base font-bold">{{userSession?.nickname ?? 'Unknown'}}</h2>
     <span class="inline-block mr-1 text-xs font-normal">Last Update: just now</span>
     <svg [class]="{'animate-spin': updating}" class="inline-block size-3 cursor-pointer"
       xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"

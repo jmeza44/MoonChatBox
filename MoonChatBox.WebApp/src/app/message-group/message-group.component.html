@@ -6,6 +6,9 @@
   </div>
   <div [class]="{'items-end': isMirrored, 'items-start': !isMirrored}"
     class="flex-1 flex flex-col gap-y-2 overflow-hidden">
+    @if (chatMessageGroup.sender.nickname !== '') {
+    <span class="font-semibold">{{chatMessageGroup.sender.nickname}}</span>
+    }
     @for (message of chatMessageGroup.messages; track $index) {
     <moon-message [message]="message"></moon-message>
     }

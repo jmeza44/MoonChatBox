@@ -119,6 +119,7 @@ src/.vs/config/applicationhost.config
 month.txt
 
 # Bazel
+/dist
 /dist/
 /bazel-out
 /integration/bazel/bazel-*

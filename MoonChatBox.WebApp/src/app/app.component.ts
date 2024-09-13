@@ -22,20 +22,11 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.chatHubService.startConnection();
 
-    this.chatHubService.userJoined$.subscribe({
-      next: (user) => {
-        const chatName: string | null = this.chatService.getChatName(user.chatId);
-        if (chatName !== null) this.toastAlertsService.information(`${user.userNickname} have joined the chat ${chatName}!`, 5000);
-        else this.toastAlertsService.information(`${user.userNickname} have joined a chat!`, 5000);
-
-      },
-    });
-    this.chatHubService.userLeft$.subscribe({
-      next: (user) => {
-        const chatName: string | null = this.chatService.getChatName(user.chatId);
-        if (chatName !== null) this.toastAlertsService.information(`${user.userNickname} have leaved the chat ${chatName}!`, 5000);
-        else this.toastAlertsService.information(`${user.userNickname} have leaved a chat!`, 5000);
-      },
+    this.chatHubService.userConnection$.subscribe({
+      next: (userConnected: boolean) => {
+        const notification = userConnected ? 'Connected' : 'Disconnected';
+        this.toastAlertsService.information(`A User ${notification}!`, 5000);
+      }
     });
   }
 }

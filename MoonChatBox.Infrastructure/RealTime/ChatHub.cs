@@ -22,13 +22,15 @@ public class ChatHub : Hub
         await Clients.Group(chatId.ToString()).SendAsync("ReceiveMessage", chatId, message, receivedAt, userSession);
     }
 
-    public override Task OnConnectedAsync()
+    public override async Task OnConnectedAsync()
     {
-        return base.OnConnectedAsync();
+        await base.OnConnectedAsync();
+        await Clients.All.SendAsync("UserConnected", Context.ConnectionId);
     }
 
-    public override Task OnDisconnectedAsync(Exception? exception)
+    public override async Task OnDisconnectedAsync(Exception? exception)
     {
-        return base.OnDisconnectedAsync(exception);
+        await base.OnDisconnectedAsync(exception);
+        await Clients.All.SendAsync("UserDisconnected", Context.ConnectionId);
     }
 }
